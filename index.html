@@ -1,0 +1,405 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css"><link rel="stylesheet" href="css/L.Control.Locate.min.css">
+        <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <link rel="stylesheet" href="css/leaflet-control-geocoder.Geocoder.css">
+        <style>
+        html, body, #map {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+        </style>
+        <title></title>
+    </head>
+    <body>
+        <div id="map">
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script><script src="js/L.Control.Locate.min.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="js/leaflet-control-geocoder.Geocoder.js"></script>
+        <script src="data/3550308_faces_de_logradouros_2020_2.js"></script>
+        <script src="data/3550407_faces_de_logradouros_2020_3.js"></script>
+        <script src="data/3550506_faces_de_logradouros_2020_4.js"></script>
+        <script src="data/3550605_faces_de_logradouros_2020_5.js"></script>
+        <script src="data/saopaulo_6.js"></script>
+        <script>
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:28, minZoom:1
+        }).fitBounds([[-23.760346729828388,-46.80175396457943],[-23.66957644218755,-46.62586374856862]]);
+        var hash = new L.Hash(map);
+        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
+        var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
+        L.control.locate({locateOptions: {maxZoom: 19}}).addTo(map);
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+        }
+        map.createPane('pane_GoogleSatellite_0');
+        map.getPane('pane_GoogleSatellite_0').style.zIndex = 400;
+        var layer_GoogleSatellite_0 = L.tileLayer('https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
+            pane: 'pane_GoogleSatellite_0',
+            opacity: 1.0,
+            attribution: '<a href="https://www.google.at/permissions/geoguidelines/attr-guide.html">Map data ©2015 Google</a>',
+            minZoom: 1,
+            maxZoom: 28,
+            minNativeZoom: 0,
+            maxNativeZoom: 20
+        });
+        layer_GoogleSatellite_0;
+        map.addLayer(layer_GoogleSatellite_0);
+        map.createPane('pane_GoogleRoad_1');
+        map.getPane('pane_GoogleRoad_1').style.zIndex = 401;
+        var layer_GoogleRoad_1 = L.tileLayer('https://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
+            pane: 'pane_GoogleRoad_1',
+            opacity: 1.0,
+            attribution: '<a href="https://www.google.at/permissions/geoguidelines/attr-guide.html">Map data ©2015 Google</a>',
+            minZoom: 1,
+            maxZoom: 28,
+            minNativeZoom: 0,
+            maxNativeZoom: 20
+        });
+        layer_GoogleRoad_1;
+        map.addLayer(layer_GoogleRoad_1);
+        function pop_3550308_faces_de_logradouros_2020_2(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2"><strong>Logradouro</strong><br />' + (feature.properties['NM_LOG'] !== null ? autolinker.link(feature.properties['NM_LOG'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_3550308_faces_de_logradouros_2020_2_0() {
+            return {
+                pane: 'pane_3550308_faces_de_logradouros_2020_2',
+                opacity: 1,
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_3550308_faces_de_logradouros_2020_2');
+        map.getPane('pane_3550308_faces_de_logradouros_2020_2').style.zIndex = 402;
+        map.getPane('pane_3550308_faces_de_logradouros_2020_2').style['mix-blend-mode'] = 'normal';
+        var layer_3550308_faces_de_logradouros_2020_2 = new L.geoJson(json_3550308_faces_de_logradouros_2020_2, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_3550308_faces_de_logradouros_2020_2',
+            layerName: 'layer_3550308_faces_de_logradouros_2020_2',
+            pane: 'pane_3550308_faces_de_logradouros_2020_2',
+            onEachFeature: pop_3550308_faces_de_logradouros_2020_2,
+            style: style_3550308_faces_de_logradouros_2020_2_0,
+        });
+        bounds_group.addLayer(layer_3550308_faces_de_logradouros_2020_2);
+        map.addLayer(layer_3550308_faces_de_logradouros_2020_2);
+        function pop_3550407_faces_de_logradouros_2020_3(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2"><strong>Logradouro</strong><br />' + (feature.properties['NM_LOG'] !== null ? autolinker.link(feature.properties['NM_LOG'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_3550407_faces_de_logradouros_2020_3_0() {
+            return {
+                pane: 'pane_3550407_faces_de_logradouros_2020_3',
+                opacity: 1,
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_3550407_faces_de_logradouros_2020_3');
+        map.getPane('pane_3550407_faces_de_logradouros_2020_3').style.zIndex = 403;
+        map.getPane('pane_3550407_faces_de_logradouros_2020_3').style['mix-blend-mode'] = 'normal';
+        var layer_3550407_faces_de_logradouros_2020_3 = new L.geoJson(json_3550407_faces_de_logradouros_2020_3, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_3550407_faces_de_logradouros_2020_3',
+            layerName: 'layer_3550407_faces_de_logradouros_2020_3',
+            pane: 'pane_3550407_faces_de_logradouros_2020_3',
+            onEachFeature: pop_3550407_faces_de_logradouros_2020_3,
+            style: style_3550407_faces_de_logradouros_2020_3_0,
+        });
+        bounds_group.addLayer(layer_3550407_faces_de_logradouros_2020_3);
+        map.addLayer(layer_3550407_faces_de_logradouros_2020_3);
+        function pop_3550506_faces_de_logradouros_2020_4(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2"><strong>Logradouro</strong><br />' + (feature.properties['NM_LOG'] !== null ? autolinker.link(feature.properties['NM_LOG'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_3550506_faces_de_logradouros_2020_4_0() {
+            return {
+                pane: 'pane_3550506_faces_de_logradouros_2020_4',
+                opacity: 1,
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_3550506_faces_de_logradouros_2020_4');
+        map.getPane('pane_3550506_faces_de_logradouros_2020_4').style.zIndex = 404;
+        map.getPane('pane_3550506_faces_de_logradouros_2020_4').style['mix-blend-mode'] = 'normal';
+        var layer_3550506_faces_de_logradouros_2020_4 = new L.geoJson(json_3550506_faces_de_logradouros_2020_4, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_3550506_faces_de_logradouros_2020_4',
+            layerName: 'layer_3550506_faces_de_logradouros_2020_4',
+            pane: 'pane_3550506_faces_de_logradouros_2020_4',
+            onEachFeature: pop_3550506_faces_de_logradouros_2020_4,
+            style: style_3550506_faces_de_logradouros_2020_4_0,
+        });
+        bounds_group.addLayer(layer_3550506_faces_de_logradouros_2020_4);
+        map.addLayer(layer_3550506_faces_de_logradouros_2020_4);
+        function pop_3550605_faces_de_logradouros_2020_5(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2"><strong>Logradouro</strong><br />' + (feature.properties['NM_LOG'] !== null ? autolinker.link(feature.properties['NM_LOG'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_3550605_faces_de_logradouros_2020_5_0() {
+            return {
+                pane: 'pane_3550605_faces_de_logradouros_2020_5',
+                opacity: 1,
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_3550605_faces_de_logradouros_2020_5');
+        map.getPane('pane_3550605_faces_de_logradouros_2020_5').style.zIndex = 405;
+        map.getPane('pane_3550605_faces_de_logradouros_2020_5').style['mix-blend-mode'] = 'normal';
+        var layer_3550605_faces_de_logradouros_2020_5 = new L.geoJson(json_3550605_faces_de_logradouros_2020_5, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_3550605_faces_de_logradouros_2020_5',
+            layerName: 'layer_3550605_faces_de_logradouros_2020_5',
+            pane: 'pane_3550605_faces_de_logradouros_2020_5',
+            onEachFeature: pop_3550605_faces_de_logradouros_2020_5,
+            style: style_3550605_faces_de_logradouros_2020_5_0,
+        });
+        bounds_group.addLayer(layer_3550605_faces_de_logradouros_2020_5);
+        map.addLayer(layer_3550605_faces_de_logradouros_2020_5);
+        function pop_saopaulo_6(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2"><strong>Município</strong><br />' + (feature.properties['NM_MUNICIP'] !== null ? autolinker.link(feature.properties['NM_MUNICIP'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Habitantes</strong><br />' + (feature.properties['V002'] !== null ? autolinker.link(feature.properties['V002'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Renda média</strong><br />' + (feature.properties['Renda MD'] !== null ? autolinker.link(feature.properties['Renda MD'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Subdistrito</strong><br />' + (feature.properties['Subdistrito'] !== null ? autolinker.link(feature.properties['Subdistrito'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_saopaulo_6_0(feature) {
+            if (feature.properties['Renda MD'] >= 0.000000 && feature.properties['Renda MD'] <= 1563.000000 ) {
+                return {
+                pane: 'pane_saopaulo_6',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.6)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(215,25,28,0.6)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['Renda MD'] >= 1563.000000 && feature.properties['Renda MD'] <= 2582.000000 ) {
+                return {
+                pane: 'pane_saopaulo_6',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.6)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(234,100,63,0.6)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['Renda MD'] >= 2582.000000 && feature.properties['Renda MD'] <= 3982.000000 ) {
+                return {
+                pane: 'pane_saopaulo_6',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.6)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(253,174,97,0.6)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['Renda MD'] >= 3982.000000 && feature.properties['Renda MD'] <= 5616.000000 ) {
+                return {
+                pane: 'pane_saopaulo_6',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.6)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(254,215,144,0.6)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['Renda MD'] >= 5616.000000 && feature.properties['Renda MD'] <= 7497.000000 ) {
+                return {
+                pane: 'pane_saopaulo_6',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.6)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,255,191,0.6)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['Renda MD'] >= 7497.000000 && feature.properties['Renda MD'] <= 9789.000000 ) {
+                return {
+                pane: 'pane_saopaulo_6',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.6)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(213,238,178,0.6)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['Renda MD'] >= 9789.000000 && feature.properties['Renda MD'] <= 13856.000000 ) {
+                return {
+                pane: 'pane_saopaulo_6',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.6)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(171,221,164,0.6)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['Renda MD'] >= 13856.000000 && feature.properties['Renda MD'] <= 25495.000000 ) {
+                return {
+                pane: 'pane_saopaulo_6',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.6)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(107,176,175,0.6)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['Renda MD'] >= 25495.000000 && feature.properties['Renda MD'] <= 49321.000000 ) {
+                return {
+                pane: 'pane_saopaulo_6',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.6)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(43,131,186,0.6)',
+                interactive: true,
+            }
+            }
+        }
+        map.createPane('pane_saopaulo_6');
+        map.getPane('pane_saopaulo_6').style.zIndex = 406;
+        map.getPane('pane_saopaulo_6').style['mix-blend-mode'] = 'normal';
+        var layer_saopaulo_6 = new L.geoJson(json_saopaulo_6, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_saopaulo_6',
+            layerName: 'layer_saopaulo_6',
+            pane: 'pane_saopaulo_6',
+            onEachFeature: pop_saopaulo_6,
+            style: style_saopaulo_6_0,
+        });
+        bounds_group.addLayer(layer_saopaulo_6);
+        map.addLayer(layer_saopaulo_6);
+        var osmGeocoder = new L.Control.Geocoder({
+            collapsed: true,
+            position: 'topleft',
+            text: 'Search',
+            title: 'Testing'
+        }).addTo(map);
+        document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
+        .className += ' fa fa-search';
+        document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
+        .title += 'Search for a place';
+        var baseMaps = {};
+        L.control.layers(baseMaps,{'sao paulo<br /><table><tr><td style="text-align: center;"><img src="legend/saopaulo_6_015630.png" /></td><td>0 - 1563</td></tr><tr><td style="text-align: center;"><img src="legend/saopaulo_6_156325821.png" /></td><td>1563 - 2582</td></tr><tr><td style="text-align: center;"><img src="legend/saopaulo_6_258239822.png" /></td><td>2582 - 3982</td></tr><tr><td style="text-align: center;"><img src="legend/saopaulo_6_398256163.png" /></td><td>3982 - 5616</td></tr><tr><td style="text-align: center;"><img src="legend/saopaulo_6_561674974.png" /></td><td>5616 - 7497</td></tr><tr><td style="text-align: center;"><img src="legend/saopaulo_6_749797895.png" /></td><td>7497 - 9789</td></tr><tr><td style="text-align: center;"><img src="legend/saopaulo_6_9789138566.png" /></td><td>9789 - 13856</td></tr><tr><td style="text-align: center;"><img src="legend/saopaulo_6_13856254957.png" /></td><td>13856 - 25495</td></tr><tr><td style="text-align: center;"><img src="legend/saopaulo_6_25495493218.png" /></td><td>25495 - 49321</td></tr></table>': layer_saopaulo_6,'<img src="legend/3550605_faces_de_logradouros_2020_5.png" /> 3550605_faces_de_logradouros_2020': layer_3550605_faces_de_logradouros_2020_5,'<img src="legend/3550506_faces_de_logradouros_2020_4.png" /> 3550506_faces_de_logradouros_2020': layer_3550506_faces_de_logradouros_2020_4,'<img src="legend/3550407_faces_de_logradouros_2020_3.png" /> 3550407_faces_de_logradouros_2020': layer_3550407_faces_de_logradouros_2020_3,'<img src="legend/3550308_faces_de_logradouros_2020_2.png" /> 3550308_faces_de_logradouros_2020': layer_3550308_faces_de_logradouros_2020_2,"Google Road": layer_GoogleRoad_1,"Google Satellite": layer_GoogleSatellite_0,}).addTo(map);
+        setBounds();
+        </script>
+    </body>
+</html>
